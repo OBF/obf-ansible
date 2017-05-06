@@ -1,0 +1,43 @@
+---
+# tasks file for reboot
+
+- name: Reboot host
+  shell: sleep 2 && shutdown -r now "{{ reboot_message }}"
+  async: 1
+  poll: 0
+  ignore_errors: yes
+
+  # Make sure ansible_ssh_host has the correct value inside the local_action module
+- name: Set default reboot_wait_host
+  become: no
+  set_fact:
+    reboot_wait_host: "{{ ansible_ssh_host | default(inventory_hostname) }}"
+  when: (reboot_wait|string in 'True.true.Yes.yes') and reboot_wait_host is undefined
+
+  # Make sure ansible_ssh_port has the correct value inside the local_action module
+- name: Set default reboot_wait_port
+  become: no
+  set_fact:
+    reboot_wait_port: "{{ ansible_ssh_port | default(22) }}"
+  when: (reboot_wait|string in 'True.true.Yes.yes') and reboot_wait_port is undefined
+
+- name: Wait for host
+  become: no
+  local_action:
+    module: wait_for
+      host="{{ reboot_wait_host }}"
+      port="{{ reboot_wait_port }}"
+      state=started
+      delay="{{ reboot_wait_delay }}"
+      timeout="{{ reboot_wait_timeout }}"
+      search_regex="{{ reboot_wait_regex | default(omit) }}"
+      connect_timeout="{{ reboot_wait_ctimeout }}"
+  when: reboot_wait|string in 'True.true.Yes.yes'
+    # Checked as string to make sure it can be specified from the command line.
+
+- name: Interval before next task
+  become: no
+  pause:
+    seconds: "{{ reboot_interval_seconds }}"
+  when: reboot_interval|string in 'True.true.Yes.yes'
+    # Checked as string to make sure it can be specified from the command line.

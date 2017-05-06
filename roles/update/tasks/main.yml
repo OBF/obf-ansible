@@ -1,0 +1,5 @@
+---
+# yum update -y
+- name: yum update packages
+  yum: name=* state=latest
+

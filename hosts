@@ -1,0 +1,17 @@
+[webservers]
+apache.open-bio.org
+
+[listservers]
+mailman.open-bio.org
+
+[bugtrackers]
+redmine.open-bio.org
+
+[buildbots]
+testing.open-bio.org
+
+[aws:children]
+webservers
+listservers
+bugtrackers
+buildbots

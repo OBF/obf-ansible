@@ -1,0 +1,23 @@
+---
+# defaults file for reboot
+
+# Reboot message
+reboot_message: 'Reboot by Ansible'
+
+# Wait for host?
+reboot_wait: 'yes'
+
+# Time to wait before polling the host
+reboot_wait_delay: 10
+
+# Timeout for host to come back up successfully
+reboot_wait_timeout: 300
+
+# Timeout for each connection attempt
+reboot_wait_ctimeout: 5
+
+# Interval after reboot?
+reboot_interval: 'no'
+
+# Interval before next task
+reboot_interval_seconds: 0
