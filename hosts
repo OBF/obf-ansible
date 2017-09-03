@@ -8,7 +8,6 @@ mailman.open-bio.org
 redmine.open-bio.org
 
 [buildbots]
-testing.open-bio.org
 
 [aws:children]
 webservers
