@@ -5,12 +5,16 @@ apache.open-bio.org
 mailman.open-bio.org
 
 [bugtrackers]
-redmine.open-bio.org
 
 [buildbots]
 
 [aws:children]
 webservers
 listservers
+bugtrackers
+buildbots
+
+[aws-nomail:children]
+webservers
 bugtrackers
 buildbots
