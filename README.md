@@ -16,7 +16,7 @@ Playbooks here currently have the following dependencies:
 
 Run in the following way:
 ```sh
-$ ansible-playbook -i hosts <PLAYBOOK>
+$ ansible-playbook -i hosts.yml <PLAYBOOK>
 ```
 
 The following playbooks are currently available:
