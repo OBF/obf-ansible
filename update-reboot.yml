@@ -2,10 +2,10 @@
 - name: perform yum update followed by reboot
   hosts: aws
   become: yes
-  remote_user: ec2-user
+#  debugger: on_failed
 
   roles:
-    - role: update
+    - role: stafwag.package_update
     - role: GROG.reboot
       reboot_wait: yes
       reboot_wait_delay: 60
